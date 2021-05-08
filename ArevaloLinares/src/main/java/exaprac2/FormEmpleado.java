@@ -239,6 +239,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         Empleado emple = new Empleado();
         
         //Cargando el objeto con los datos de la tabla
+        emple.setCodigo(Integer.parseInt(txtCodigo.getText()));
         emple.setNombre(txtNombre.getText());        
         emple.setSalario(Double.parseDouble(txtSalario.getText()));       
         emple.setCantidad(Integer.parseInt(txtCantidad.getText()));      
@@ -254,8 +255,8 @@ public class FormEmpleado extends javax.swing.JFrame {
     public void retotalizar(){
         total =0;
         for(int i=0; i < tblDatos.getRowCount(); i++){
-            total +=(Double.parseDouble(tblDatos.getValueAt(i, 1).toString()))*
-                    (Integer.parseInt(tblDatos.getValueAt(i, 2).toString()));
+            total +=(Double.parseDouble(tblDatos.getValueAt(i, 2).toString()))*
+                    (Integer.parseInt(tblDatos.getValueAt(i, 3).toString()));
         }
        
         lblTotal.setText(String.valueOf(total));
@@ -264,9 +265,10 @@ public class FormEmpleado extends javax.swing.JFrame {
     
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         // TODO add your handling code here:
-        txtNombre.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),0).toString());
-        txtSalario.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),1).toString());
-        txtCantidad.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),2).toString());
+        txtCodigo.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),0).toString());
+        txtNombre.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),1).toString());
+        txtSalario.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),2).toString());
+        txtCantidad.setText(tblDatos.getValueAt(tblDatos.getSelectedRow(),3).toString());
         
     }//GEN-LAST:event_tblDatosMouseClicked
 
@@ -278,6 +280,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         Empleado emple = new Empleado();
         
         //Cargando el objeto con los datos de la tabla
+        emple.setCodigo(Integer.parseInt(txtCodigo.getText()));
         emple.setNombre(txtNombre.getText()); //set es para establecer valores desde afuera hacia adentro del objeto 
         emple.setSalario(Double.parseDouble(txtSalario.getText()));
         emple.setCantidad(Integer.parseInt(txtCantidad.getText()));
@@ -285,7 +288,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         int index=0;
         for(Empleado e : datos){
-            if(e.getNombre() == e.getNombre()){
+            if(e.getCodigo() == emple.getCodigo()){
                 break;
                 
             }
@@ -295,10 +298,10 @@ public class FormEmpleado extends javax.swing.JFrame {
         datos.remove(index);
         
         }
+        cargar();
         retotalizar();
         limpiar();
-        cargarel();
-    
+            
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /*
@@ -322,11 +325,12 @@ public class FormEmpleado extends javax.swing.JFrame {
    */
     
     public void limpiar(){
+        txtCodigo.setText("");
         txtNombre.setText("");
         txtSalario.setText("");
         txtCantidad.setText("");       
     }
-    
+   /* 
     public void cargarel(){
         modelo.setNumRows(0); //Limpiando el modelo...
         //metiendo los datos al modelo
@@ -340,14 +344,14 @@ public class FormEmpleado extends javax.swing.JFrame {
         tblDatos.setModel(modelo);
         
     }
-    
+    */
     public void cargar(){
         //cargar la lista al modelo, luego el modelo a la tabla
         modelo.setNumRows(0); //Limpiando el modelo...
         //metiendo los datos al modelo
         for(Empleado e : datos) {
             //asi es el foreach en java solo que se tiene que dejar como un ciloc for normal
-            modelo.addRow(new Object[] {e.getNombre(),
+            modelo.addRow(new Object[] {e.getCodigo(),e.getNombre(),
                 e.getSalario(),e.getCantidad()});
         }
         

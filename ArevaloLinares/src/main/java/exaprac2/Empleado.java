@@ -10,6 +10,7 @@ package exaprac2;
  * @author 50373
  */
 public class Empleado {
+    private int codigo;
     private String nombre;
     private double salario;
     private int cantidad;
@@ -22,6 +23,7 @@ public class Empleado {
         this.salario = salario;
         this.cantidad = cantidad;
     }
+    
 
     public int getCantidad() {
         return cantidad;
@@ -46,5 +48,13 @@ public class Empleado {
     public void setSalario(double salario) {
         this.salario = salario;
     } 
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
     
 }
