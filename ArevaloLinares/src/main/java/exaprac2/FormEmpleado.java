@@ -358,8 +358,8 @@ public class FormEmpleado extends javax.swing.JFrame {
         //aplicar el modelo a la tabla
         tblDatos.setModel(modelo);
         
-        total += (Integer.parseInt(txtSalario.getText()))*
-                 (Double.parseDouble(txtCantidad.getText()));
+        total += (Double.parseDouble(txtSalario.getText()))*
+                 (Integer.parseInt(txtCantidad.getText()));
         
         lblTotal.setText(String.valueOf(total));        
     }
