@@ -21,6 +21,7 @@ public class FormEmpleado extends javax.swing.JFrame {
     
     String [] columnas = {"Codigo","Nombre","Salario por Hora","Cantdiad de Horas"};
     DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+    public int contador= 0;
     
     //Crear una lista para guardar los registros
     List<Empleado> datos = new ArrayList<Empleado>();
@@ -36,9 +37,10 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         //Aplicar el modelo a la tabla
         tblDatos.setModel(modelo);
-        lblmayor.setText("hola");
+        lblmayor.setText(sueldoMayor());
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -252,8 +254,35 @@ public class FormEmpleado extends javax.swing.JFrame {
         limpiar();
     }//GEN-LAST:event_btnAgregarMouseClicked
     
-    public void sueldoMayor(){
-        int sueldo=0;
+    public String sueldoMayor(){
+        
+        double caja[] = new double[contador];
+        double max = 0;
+            
+        for(int i=1;i<contador;i++){
+            Empleado[] emple = new Empleado[i];
+            emple[i].setCodigo(Integer.parseInt(tblDatos.getValueAt(i, 0).toString()));
+            emple[i].setNombre(tblDatos.getValueAt(i, 1).toString());
+            emple[i].setSalario(Double.parseDouble(tblDatos.getValueAt(i, 2).toString()));
+            emple[i].setCantidad(Integer.parseInt(tblDatos.getValueAt(i, 3).toString()));
+            datos.add(emple[i]);
+            
+            double sueldo = emple[i].sumSal();
+            caja[i] = sueldo;
+            
+            max = caja[0];
+            for (int y = 1;y<caja.length;y++){
+                if (caja[y] > max){
+                  max  = caja[y];
+                }
+            }
+        }
+        String x = String.valueOf(max);
+        return  x;
+        
+        
+        
+        /*int sueldo=0;
         int sueldoMayor=0;
         boolean primersueldo= false;
         
@@ -266,7 +295,7 @@ public class FormEmpleado extends javax.swing.JFrame {
            }
            if(sueldo > sueldoMayor)sueldoMayor=sueldo;
        
-       }
+       }*/
        
     }
     

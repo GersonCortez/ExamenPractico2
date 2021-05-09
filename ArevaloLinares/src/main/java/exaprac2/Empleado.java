@@ -57,4 +57,10 @@ public class Empleado {
         this.codigo = codigo;
     }
     
+    public double sumSal(){
+        double salarioma;
+        salarioma = salario * cantidad;
+        return salarioma;
+    }
+    
 }
