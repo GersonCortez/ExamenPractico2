@@ -36,6 +36,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         //Aplicar el modelo a la tabla
         tblDatos.setModel(modelo);
+        lblmayor.setText("hola");
     }
 
     /**
@@ -61,7 +62,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
-        lbEmpleadomejor = new javax.swing.JLabel();
+        lblmayor = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -69,7 +70,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Salaraio por Hora:");
+        jLabel1.setText("Salario por Hora:");
 
         jLabel2.setText("Nombre:");
 
@@ -164,7 +165,7 @@ public class FormEmpleado extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbEmpleadomejor, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(lblmayor, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,7 +227,7 @@ public class FormEmpleado extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmpleadomejor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblmayor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -250,7 +251,24 @@ public class FormEmpleado extends javax.swing.JFrame {
         cargar();
         limpiar();
     }//GEN-LAST:event_btnAgregarMouseClicked
-
+    
+    public void sueldoMayor(){
+        int sueldo=0;
+        int sueldoMayor=0;
+        boolean primersueldo= false;
+        
+       for(int i=0; i < tblDatos.getRowCount(); i++){
+           sueldo = (int) ((Integer.parseInt(tblDatos.getValueAt(i, 3).toString())) * (Double.parseDouble(tblDatos.getValueAt(i, 2).toString())));
+                    
+           if(primersueldo==false){
+               sueldoMayor=sueldo;
+               primersueldo=true;
+           }
+           if(sueldo > sueldoMayor)sueldoMayor=sueldo;
+       
+       }
+       
+    }
     
     public void retotalizar(){
         total =0;
@@ -276,7 +294,7 @@ public class FormEmpleado extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         if(JOptionPane.showConfirmDialog(this,"Desea Eliminar el registro?",
-                "Titulo",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE) == 0){
+                "Eliminando Registro",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
         Empleado emple = new Empleado();
         
         //Cargando el objeto con los datos de la tabla
@@ -330,21 +348,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         txtSalario.setText("");
         txtCantidad.setText("");       
     }
-   /* 
-    public void cargarel(){
-        modelo.setNumRows(0); //Limpiando el modelo...
-        //metiendo los datos al modelo
-        for(Empleado e : datos) {
-            //asi es el foreach en java solo que se tiene que dejar como un ciloc for normal
-            modelo.addRow(new Object[] {e.getNombre(),
-                e.getSalario(),e.getCantidad()});
-        }
-        
-        //aplicar el modelo a la tabla
-        tblDatos.setModel(modelo);
-        
-    }
-    */
+    
     public void cargar(){
         //cargar la lista al modelo, luego el modelo a la tabla
         modelo.setNumRows(0); //Limpiando el modelo...
@@ -414,8 +418,8 @@ public class FormEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbEmpleadomejor;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblmayor;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
